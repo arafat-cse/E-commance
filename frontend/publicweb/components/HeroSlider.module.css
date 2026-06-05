@@ -1,0 +1,252 @@
+.heroSection {
+  width: 100%;
+  position: relative;
+  height: 480px; /* Adjusted slightly to look perfect next to the mango banner */
+  background-color: #f1f5f9;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.sliderContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-slow), visibility var(--transition-slow);
+  display: flex;
+  align-items: center;
+}
+
+.slideActive {
+  opacity: 1;
+  visibility: visible;
+}
+
+.slideBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.slideBg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 60%, rgba(255,255,255,0) 100%);
+}
+
+.slideContentContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 3rem;
+  z-index: 2;
+  position: relative;
+}
+
+.slideContent {
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: slideUpContent 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpContent {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.badge {
+  display: inline-flex;
+  align-self: flex-start;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.5px;
+}
+
+.title {
+  font-size: 2.5rem; /* Slightly reduced for split grid */
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1.25;
+}
+
+.titleHighlight {
+  color: var(--primary);
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.ctaButton {
+  align-self: flex-start;
+  background-color: var(--accent);
+  color: var(--text-main);
+  font-size: 1.05rem;
+  font-weight: 800;
+  padding: 0.85rem 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 20px rgba(242, 173, 31, 0.35);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  transition: all var(--transition-normal);
+  margin-top: 0.5rem;
+}
+
+.ctaButton:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(242, 173, 31, 0.5);
+}
+
+/* Arrows */
+.arrowBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--text-main);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-fast);
+}
+
+.arrowBtn:hover {
+  background-color: var(--primary);
+  color: white;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.prevArrow {
+  left: 1.5rem;
+}
+
+.nextArrow {
+  right: 1.5rem;
+}
+
+/* Indicators */
+.indicators {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 3rem; /* Left-aligned for split layout */
+  display: flex;
+  gap: 0.75rem;
+  z-index: 10;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.15);
+  transition: all var(--transition-normal);
+}
+
+.dotActive {
+  background-color: var(--primary);
+  width: 24px;
+  border-radius: 5px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .title {
+    font-size: 2.2rem;
+  }
+  .slideContentContainer {
+    padding: 0 2rem;
+  }
+  .indicators {
+    left: 2rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .heroSection {
+    height: 420px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    height: 360px;
+  }
+  
+  .slideBg::after {
+    background: linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 70%, rgba(255,255,255,0.6) 100%);
+  }
+  
+  .title {
+    font-size: 1.8rem;
+  }
+  
+  .description {
+    font-size: 0.95rem;
+  }
+  
+  .arrowBtn {
+    display: none; /* Swipe on touch devices */
+  }
+  
+  .slideContentContainer {
+    padding: 0 1.5rem;
+  }
+  
+  .indicators {
+    left: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroSection {
+    height: 300px;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .description {
+    display: none; /* Hide descriptions on small mobile */
+  }
+  
+  .ctaButton {
+    padding: 0.65rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}

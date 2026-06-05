@@ -1,0 +1,137 @@
+.section {
+  padding: 3rem 0;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+}
+
+.categoriesWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+  scrollbar-width: none; /* Firefox */
+}
+
+.categoriesWrapper::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.categoryCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 110px;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.categoryCard:hover {
+  transform: translateY(-5px);
+}
+
+.iconCircle {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.85rem;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  position: relative;
+  background: var(--bg-main);
+  border: 2px solid transparent;
+}
+
+.categoryCard:hover .iconCircle {
+  box-shadow: 0 8px 16px rgba(var(--primary-rgb), 0.15);
+  border-color: rgba(var(--primary-rgb), 0.3);
+  background-color: var(--primary-light);
+}
+
+.iconCircle::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border-radius: 50%;
+  border: 1px dashed rgba(var(--primary-rgb), 0.2);
+  transition: transform var(--transition-fast);
+}
+
+.categoryCard:hover .iconCircle::after {
+  transform: rotate(45deg);
+  border-color: var(--primary);
+}
+
+.icon {
+  z-index: 2;
+  transition: transform var(--transition-fast);
+}
+
+.categoryCard:hover .icon {
+  transform: scale(1.1);
+}
+
+.name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  text-align: center;
+  transition: color var(--transition-fast);
+}
+
+.categoryCard:hover .name {
+  color: var(--primary);
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .section {
+    padding: 2rem 0;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .categoriesWrapper {
+    gap: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .categoryCard {
+    width: 90px;
+  }
+  
+  .iconCircle {
+    width: 72px;
+    height: 72px;
+  }
+  
+  .name {
+    font-size: 0.85rem;
+  }
+}

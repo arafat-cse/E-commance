@@ -1,0 +1,199 @@
+.footer {
+  background-color: #0f2416; /* Deep forest green */
+  color: #e2e8f0;
+  padding: 4.5rem 0 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1.2fr 1.6fr;
+  gap: 2.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.logoAccent {
+  color: var(--accent);
+}
+
+.desc {
+  line-height: 1.6;
+  color: #94a3b8;
+}
+
+.heading {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 35px;
+  height: 2px;
+  background-color: var(--accent);
+}
+
+.linksList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  list-style: none;
+}
+
+.linkItem {
+  color: #94a3b8;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.linkItem:hover {
+  color: var(--accent);
+  transform: translateX(3px);
+}
+
+.contactItem {
+  display: flex;
+  gap: 0.75rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+.contactIcon {
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+/* App Download Badges */
+.appDownload {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.appBtn {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: white;
+  transition: all var(--transition-fast);
+}
+
+.appBtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.appBtnText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.appBtnSub {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.appBtnMain {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* Bottom Bar */
+.bottomBar {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.bottomLinks {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.bottomLink:hover {
+  color: #e2e8f0;
+}
+
+/* Payment Methods */
+.paymentMethods {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.paymentBadge {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #94a3b8;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Responsive Grid */
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: 1.5fr 1fr 1.2fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 3rem 0 1.5rem 0;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .bottomBar {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .bottomLinks {
+    justify-content: center;
+  }
+}
