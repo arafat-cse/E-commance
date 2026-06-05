@@ -1,0 +1,59 @@
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-muted: #f0f3f6;
+  --border: #d9e0e7;
+  --text: #17202a;
+  --muted: #667085;
+  --soft: #98a2b3;
+  --green: #1f7a4d;
+  --blue: #2563eb;
+  --violet: #6d5bd0;
+  --amber: #b7791f;
+  --danger: #c24130;
+  --radius: 8px;
+  --shadow: 0 16px 40px rgba(16, 24, 40, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-admin), Arial, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+}
+
+::selection {
+  background: rgba(37, 99, 235, 0.18);
+}

@@ -1,0 +1,283 @@
+.shell {
+  display: grid;
+  grid-template-columns: 225px minmax(0, 1fr);
+  min-height: 100vh;
+  background: #eeeeee;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  background: #303030;
+  color: #ffffff;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 66px;
+  padding: 0 16px;
+  background: #232323;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.brandMark {
+  width: 22px;
+  height: 22px;
+  clip-path: polygon(0 0, 100% 22%, 38% 100%);
+  background: linear-gradient(135deg, #ff1d25 0 45%, #ffc400 46% 70%, #0ad06f 71%);
+}
+
+.nav {
+  padding: 0 0 18px;
+}
+
+.navGroup {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 14px 0;
+}
+
+.navGroup p {
+  margin: 0 14px 10px;
+  color: #ff1919;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.navItem {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 36px;
+  padding: 0 14px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.navItem:hover,
+.active {
+  background: #ff1010;
+}
+
+.navIcon {
+  display: grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.navText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.navItem em {
+  display: grid;
+  min-width: 20px;
+  height: 20px;
+  place-items: center;
+  border-radius: 999px;
+  background: #00d853;
+  color: #ffffff;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.navItem:nth-child(4) em {
+  background: #ffc400;
+  color: #111111;
+}
+
+.main {
+  min-width: 0;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 44px minmax(220px, 320px) 1fr;
+  align-items: center;
+  gap: 18px;
+  height: 66px;
+  padding: 0 16px;
+  background: #232323;
+  color: #ffffff;
+}
+
+.menuBtn {
+  display: grid;
+  gap: 4px;
+  width: 34px;
+  height: 34px;
+  place-content: center;
+  border: 0;
+  background: transparent;
+}
+
+.menuBtn span {
+  width: 17px;
+  height: 2px;
+  background: #a7a7a7;
+}
+
+.search {
+  display: grid;
+  grid-template-columns: 1fr 26px;
+  align-items: center;
+  height: 36px;
+  border-radius: 999px;
+  background: #ffffff;
+  padding: 0 8px 0 16px;
+  color: #222222;
+}
+
+.search input {
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #222222;
+}
+
+.search span {
+  color: #666666;
+  font-size: 20px;
+}
+
+.topActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.topActions button,
+.profileBtn {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #bfbfbf;
+  font-weight: 900;
+}
+
+.bell {
+  position: relative;
+}
+
+.bell small {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: grid;
+  width: 16px;
+  height: 16px;
+  place-items: center;
+  border-radius: 999px;
+  background: #ff0d61;
+  color: #ffffff;
+  font-size: 10px;
+}
+
+.profileBtn {
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  background: linear-gradient(135deg, #d9dee7, #768293);
+  color: #202020;
+}
+
+.content {
+  padding: 24px 12px 32px;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.pageHeader h1 {
+  font-size: 22px;
+  line-height: 1.1;
+}
+
+.pageHeader p {
+  margin-top: 6px;
+  color: var(--muted);
+}
+
+.eyebrow {
+  margin: 0 !important;
+  color: #ff1010 !important;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 920px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    height: auto;
+  }
+
+  .nav {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .navGroup {
+    border-bottom: 0;
+  }
+
+  .topbar {
+    grid-template-columns: 36px minmax(0, 1fr);
+  }
+
+  .topActions {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 620px) {
+  .content {
+    padding: 14px 8px 24px;
+  }
+
+  .nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pageHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

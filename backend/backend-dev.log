@@ -1,0 +1,16 @@
+[Fri Jun  5 22:22:29 2026] PHP 8.2.12 Development Server (http://127.0.0.1:8000) started
+[Fri Jun  5 22:22:53 2026] 127.0.0.1:56161 Accepted
+[Fri Jun  5 22:22:53 2026] 127.0.0.1:56161 [200]: GET /api/health
+[Fri Jun  5 22:22:53 2026] 127.0.0.1:56161 Closing
+[Fri Jun  5 22:22:53 2026] 127.0.0.1:56163 Accepted
+[Fri Jun  5 22:22:53 2026] 127.0.0.1:56163 [200]: POST /api/auth/login
+[Fri Jun  5 22:22:53 2026] 127.0.0.1:56163 Closing
+[Fri Jun  5 22:23:56 2026] 127.0.0.1:64588 Accepted
+[Fri Jun  5 22:23:56 2026] 127.0.0.1:64588 [200]: POST /api/auth/login
+[Fri Jun  5 22:23:56 2026] 127.0.0.1:64588 Closing
+[Fri Jun  5 22:24:07 2026] 127.0.0.1:53653 Accepted
+[Fri Jun  5 22:24:07 2026] 127.0.0.1:53653 [200]: POST /api/auth/login
+[Fri Jun  5 22:24:07 2026] 127.0.0.1:53653 Closing
+[Sat Jun  6 02:22:55 2026] 127.0.0.1:64093 Accepted
+[Sat Jun  6 02:22:55 2026] 127.0.0.1:64093 [200]: POST /api/auth/login
+[Sat Jun  6 02:22:55 2026] 127.0.0.1:64093 Closing

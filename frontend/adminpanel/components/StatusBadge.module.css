@@ -1,0 +1,35 @@
+.badge {
+  display: inline-flex;
+  min-height: 26px;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #eef2f6;
+  color: #475467;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.active,
+.delivered,
+.paid {
+  background: #e9f7ef;
+  color: var(--green);
+}
+
+.pending,
+.low-stock {
+  background: #fff6df;
+  color: var(--amber);
+}
+
+.confirmed,
+.shipped {
+  background: #eaf1ff;
+  color: var(--blue);
+}
+
+.suspended {
+  background: #feeceb;
+  color: var(--danger);
+}

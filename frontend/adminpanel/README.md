@@ -44,7 +44,7 @@ Edit `.env.local`:
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:8000/api
-NEXT_PUBLIC_ADMIN_URL=http://localhost:3001
+NEXT_PUBLIC_ADMIN_URL=http://localhost:3001/admin
 NEXT_PUBLIC_PUBLIC_WEBSITE_URL=http://localhost:3000
 ```
 
@@ -56,7 +56,25 @@ npm run dev
 yarn dev
 ```
 
-Access the admin panel at: `http://localhost:3001`
+Access the admin login at: `http://localhost:3001/admin/login`
+
+---
+
+## Route Convention
+
+All admin UI pages must live under the `/admin` namespace:
+
+```text
+/admin/login
+/admin/dashboard
+/admin/products
+/admin/orders
+/admin/customers
+/admin/categories
+/admin/settings
+```
+
+In Next.js app router, create the login page at `app/admin/login/page.tsx`.
 
 ---
 
@@ -406,7 +424,7 @@ Global styles in `app/globals.css` and component-specific styles.
 NEXT_PUBLIC_API_URL=http://localhost:8000/api
 
 # URLs
-NEXT_PUBLIC_ADMIN_URL=http://localhost:3001
+NEXT_PUBLIC_ADMIN_URL=http://localhost:3001/admin
 NEXT_PUBLIC_PUBLIC_WEBSITE_URL=http://localhost:3000
 
 # Optional
@@ -558,7 +576,7 @@ vercel
 Update `.env.production` or Vercel dashboard:
 ```env
 NEXT_PUBLIC_API_URL=https://api.yourdomain.com/api
-NEXT_PUBLIC_ADMIN_URL=https://admin.yourdomain.com
+NEXT_PUBLIC_ADMIN_URL=https://admin.yourdomain.com/admin
 NEXT_PUBLIC_PUBLIC_WEBSITE_URL=https://yourdomain.com
 ```
 
