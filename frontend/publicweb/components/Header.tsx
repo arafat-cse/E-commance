@@ -105,12 +105,12 @@ export default function Header() {
               <span>Track Order</span>
             </Link>
 
-            <button className={styles.actionBtn}>
+            <Link href="/login" className={styles.actionBtn} onClick={() => setSearchQuery('')}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.0" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
               </svg>
               <span>Sign In</span>
-            </button>
+            </Link>
 
             <button className={styles.actionBtn} aria-label="Wishlist">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.0" strokeLinecap="round" strokeLinejoin="round">
