@@ -1,256 +1,259 @@
 # Admin Panel Roadmap
 
 ## Overview
-The Admin Panel is a Next.js application that provides administrative control over the entire e-commerce platform. It allows admins to manage products, orders, customers, and view analytics.
+
+The Admin Panel is a Next.js application for managing the e-commerce platform. It controls product catalog, orders, customers, categories, reviews, and dashboard analytics through the Laravel backend API.
+
+Current local admin URL:
+
+```text
+http://localhost:3001/admin/login
+```
+
+---
+
+## Current Status
+
+Completed:
+
+- [x] Next.js app scaffold
+- [x] `/admin/login` route
+- [x] `/admin/dashboard` route
+- [x] Products list page
+- [x] Orders list page
+- [x] Customers list page
+- [x] Categories list page
+- [x] Settings page
+- [x] Shared admin shell/sidebar layout
+- [x] Shared table and status badge components
+- [x] Mock operational data for first UI pass
+- [x] Build and lint passing
+
+In progress / next:
+
+- [ ] Connect UI to Laravel admin API
+- [ ] JWT login and token storage
+- [ ] Protected route middleware
+- [ ] Create/edit product forms
+- [ ] Order detail page and status update actions
+- [ ] Customer detail page and status update actions
+- [ ] Review moderation page
+- [ ] Replace mock data with API services
 
 ---
 
 ## Architecture
 
-The Admin Panel controls the public website through:
-1. **Backend API Calls** - All data management goes through Laravel API
-2. **Internal Navigation** - Links to view/preview changes on public site
-3. **Real-time Updates** - Changes immediately reflect on publicweb
+Admin actions flow through the backend and update publicweb data:
 
+```text
+Admin Panel
+  -> Laravel Admin API
+  -> Database
+  -> Public Website reads updated product/order/category data
 ```
-┌─────────────────────────────────┐
-│   Admin Panel (Next.js App)     │
-│                                 │
-│  ├─ Dashboard                   │
-│  ├─ Products Management    ────→ Update publicweb
-│  ├─ Orders Management     ────→ Display on publicweb
-│  ├─ Customers Management  ────→ User data
-│  ├─ Categories            ────→ Navigation on publicweb
-│  └─ Settings              ────→ Site configuration
-│                                 │
-└────────────┬────────────────────┘
-             │ API Calls
-             ▼
-    Laravel Backend API
+
+Backend admin API namespace:
+
+```text
+/api/admin/...
+```
+
+Public storefront API namespace:
+
+```text
+/api/storefront/...
 ```
 
 ---
 
-## Project Structure
+## Implemented Project Structure
 
-```
+```text
 frontend/adminpanel/
-├── app/
-│   ├── layout.tsx              # Root layout
-│   ├── page.tsx                # Dashboard
-│   ├── middleware.ts           # Auth middleware
-│   │
-│   ├── (auth)/
-│   │   ├── login/page.tsx       # Admin login
-│   │   └── register/page.tsx    # Admin registration
-│   │
-│   ├── dashboard/
-│   │   ├── page.tsx            # Main dashboard
-│   │   └── analytics/
-│   │       └── page.tsx        # Analytics & reports
-│   │
-│   ├── products/
-│   │   ├── page.tsx            # Products list
-│   │   ├── [id]/page.tsx       # Edit product
-│   │   ├── create/page.tsx     # Create product
-│   │   └── layout.tsx
-│   │
-│   ├── orders/
-│   │   ├── page.tsx            # Orders list
-│   │   ├── [id]/page.tsx       # Order details
-│   │   └── layout.tsx
-│   │
-│   ├── customers/
-│   │   ├── page.tsx            # Customers list
-│   │   ├── [id]/page.tsx       # Customer details
-│   │   └── layout.tsx
-│   │
-│   ├── categories/
-│   │   ├── page.tsx            # Categories list
-│   │   ├── [id]/page.tsx       # Edit category
-│   │   ├── create/page.tsx     # Create category
-│   │   └── layout.tsx
-│   │
-│   └── settings/
-│       └── page.tsx            # Settings page
-│
-├── components/
-│   ├── Navbar.tsx
-│   ├── Sidebar.tsx
-│   ├── DashboardCard.tsx
-│   ├── DataTable.tsx
-│   ├── Form/
-│   │   ├── ProductForm.tsx
-│   │   ├── OrderForm.tsx
-│   │   └── CategoryForm.tsx
-│   ├── Modal/
-│   │   ├── DeleteConfirm.tsx
-│   │   └── Notification.tsx
-│   └── Charts/
-│       ├── SalesChart.tsx
-│       ├── OrderChart.tsx
-│       └── RevenueChart.tsx
-│
-├── services/
-│   ├── api.ts                  # API client setup
-│   ├── productService.ts       # Product API calls
-│   ├── orderService.ts         # Order API calls
-│   ├── customerService.ts      # Customer API calls
-│   ├── authService.ts          # Authentication
-│   └── categoryService.ts      # Category API calls
-│
-├── context/
-│   ├── AuthContext.tsx         # Auth state management
-│   └── AdminContext.tsx        # Admin-specific state
-│
-├── hooks/
-│   ├── useAuth.ts
-│   ├── useApi.ts
-│   └── useNotification.ts
-│
-├── types/
-│   ├── product.ts
-│   ├── order.ts
-│   ├── customer.ts
-│   ├── category.ts
-│   └── api.ts
-│
-├── utils/
-│   ├── constants.ts
-│   ├── helpers.ts
-│   └── validators.ts
-│
-├── styles/
-│   ├── globals.css
-│   └── components.css
-│
-├── public/
-│   └── images/
-│
-├── package.json
-├── tsconfig.json
-├── next.config.ts
-├── tailwind.config.js
-└── README.md
+|-- app/
+|   |-- layout.tsx
+|   |-- page.tsx                         # redirects to /admin/login
+|   |-- globals.css
+|   `-- admin/
+|       |-- page.tsx                     # redirects to /admin/dashboard
+|       |-- shared.module.css
+|       |-- login/
+|       |   |-- page.tsx                 # /admin/login
+|       |   `-- login.module.css
+|       |-- dashboard/
+|       |   |-- page.tsx                 # /admin/dashboard
+|       |   `-- page.module.css
+|       |-- products/page.tsx            # /admin/products
+|       |-- orders/page.tsx              # /admin/orders
+|       |-- customers/page.tsx           # /admin/customers
+|       |-- categories/page.tsx          # /admin/categories
+|       `-- settings/page.tsx            # /admin/settings
+|-- components/
+|   |-- AdminShell.tsx
+|   |-- AdminShell.module.css
+|   |-- AdminTable.tsx
+|   |-- AdminTable.module.css
+|   |-- StatusBadge.tsx
+|   `-- StatusBadge.module.css
+|-- lib/
+|   `-- adminData.ts                     # temporary mock data
+|-- package.json
+|-- tsconfig.json
+|-- next.config.ts
+`-- eslint.config.mjs
 ```
 
 ---
 
-## Key Features
+## Route Map
 
-### 1. Authentication & Authorization
-- [ ] Admin login page
-- [ ] JWT token management
-- [ ] Role-based access control
-- [ ] Session management
-- [ ] Logout functionality
+Admin UI:
 
-### 2. Dashboard
-- [ ] Overview metrics (Total orders, revenue, customers)
-- [ ] Recent orders widget
-- [ ] Sales charts
-- [ ] Quick actions
-- [ ] Performance indicators
+```text
+GET /admin/login
+GET /admin/dashboard
+GET /admin/products
+GET /admin/orders
+GET /admin/customers
+GET /admin/categories
+GET /admin/settings
+```
 
-### 3. Product Management
-- [ ] View all products
-- [ ] Create new product
-- [ ] Edit product details
-- [ ] Upload product images
-- [ ] Manage inventory
-- [ ] View product preview on publicweb
-- [ ] Delete products
+Future detail/create pages:
 
-### 4. Order Management
-- [ ] View all orders
-- [ ] Order details & history
-- [ ] Update order status
-- [ ] Generate invoices
-- [ ] Manage shipping
-- [ ] Order filtering & search
-
-### 5. Customer Management
-- [ ] View all customers
-- [ ] Customer details
-- [ ] View customer orders
-- [ ] Send notifications
-- [ ] Ban/block customers
-- [ ] Export customer data
-
-### 6. Category Management
-- [ ] Create categories
-- [ ] Edit categories
-- [ ] Organize hierarchy
-- [ ] Manage category images
-- [ ] Assign products to categories
-
-### 7. Settings
-- [ ] Site configuration
-- [ ] Email settings
-- [ ] Payment settings
-- [ ] Shipping configuration
-- [ ] Tax settings
-- [ ] Theme customization
-
----
-
-## Navigation Links
-
-### Internal Navigation (Next.js Links)
-```typescript
-// View products on public site
-/publicweb/products
-
-// View specific product
-/publicweb/products/{id}
-
-// View categories
-/publicweb/collections/
-
-// View customer reviews
-/publicweb/products/{id}#reviews
+```text
+GET /admin/products/create
+GET /admin/products/{id}
+GET /admin/orders/{id}
+GET /admin/customers/{id}
+GET /admin/categories/{id}
+GET /admin/reviews
 ```
 
 ---
 
-## API Integration Points
+## Backend API Integration
 
-### Products API
-- `GET /api/products` - Fetch all products
-- `POST /api/products` - Create product
-- `PUT /api/products/{id}` - Update product
-- `DELETE /api/products/{id}` - Delete product
-- `GET /api/products/{id}` - Get product details
+Authentication:
 
-### Orders API
-- `GET /api/orders` - Fetch all orders
-- `GET /api/orders/{id}` - Get order details
-- `PUT /api/orders/{id}` - Update order
-- `POST /api/orders/{id}/cancel` - Cancel order
+```text
+POST /api/auth/login
+GET  /api/auth/me
+POST /api/auth/logout
+POST /api/auth/refresh
+```
 
-### Customers API
-- `GET /api/customers` - List customers
-- `GET /api/customers/{id}` - Customer details
-- `PUT /api/customers/{id}` - Update customer
-- `DELETE /api/customers/{id}` - Delete customer
+Admin dashboard:
 
-### Categories API
-- `GET /api/categories` - List categories
-- `POST /api/categories` - Create category
-- `PUT /api/categories/{id}` - Update category
-- `DELETE /api/categories/{id}` - Delete category
+```text
+GET /api/admin/dashboard
+GET /api/admin/settings
+```
+
+Products:
+
+```text
+GET    /api/admin/products
+POST   /api/admin/products
+GET    /api/admin/products/{id}
+PUT    /api/admin/products/{id}
+DELETE /api/admin/products/{id}
+```
+
+Orders:
+
+```text
+GET /api/admin/orders
+GET /api/admin/orders/{id}
+PUT /api/admin/orders/{id}
+```
+
+Customers:
+
+```text
+GET    /api/admin/customers
+GET    /api/admin/customers/{id}
+PUT    /api/admin/customers/{id}
+DELETE /api/admin/customers/{id}
+```
+
+Categories:
+
+```text
+GET    /api/admin/categories
+PUT    /api/admin/categories/{category}
+DELETE /api/admin/categories/{category}
+```
+
+Reviews:
+
+```text
+GET    /api/admin/reviews
+PUT    /api/admin/reviews/{id}
+DELETE /api/admin/reviews/{id}
+```
 
 ---
 
-## Development Timeline
+## Feature Plan
 
-| Week | Tasks | Status |
-|------|-------|--------|
-| 1 | Setup project, authentication, dashboard | 🔄 |
-| 2 | Product & Category management | ⏳ |
-| 3 | Order & Customer management | ⏳ |
-| 4 | Analytics, reports, settings | ⏳ |
-| 5 | Testing, optimization, deployment | ⏳ |
+### Authentication
+
+- [x] Login screen UI
+- [ ] Submit credentials to `/api/auth/login`
+- [ ] Store JWT token securely
+- [ ] Load current admin with `/api/auth/me`
+- [ ] Redirect non-admin users away from `/admin/*`
+- [ ] Logout and token refresh
+
+### Dashboard
+
+- [x] Metrics cards
+- [x] Recent orders table
+- [x] Operations focus panel
+- [ ] Connect to `/api/admin/dashboard`
+- [ ] Add basic charts after live data exists
+
+### Product Management
+
+- [x] Product list UI
+- [x] Search/filter toolbar UI
+- [ ] Fetch from `/api/admin/products`
+- [ ] Create product form
+- [ ] Edit product form
+- [ ] Delete confirmation modal
+- [ ] Publicweb preview link
+
+### Order Management
+
+- [x] Order list UI
+- [x] Status/payment badges
+- [ ] Fetch from `/api/admin/orders`
+- [ ] Order detail page
+- [ ] Status update action
+- [ ] Invoice data view
+
+### Customer Management
+
+- [x] Customer list UI
+- [ ] Fetch from `/api/admin/customers`
+- [ ] Customer detail page
+- [ ] Customer order history
+- [ ] Suspend/delete customer action
+
+### Category Management
+
+- [x] Category list UI
+- [ ] Fetch from `/api/admin/categories`
+- [ ] Rename category
+- [ ] Move products before deleting category
+
+### Settings
+
+- [x] Settings overview UI
+- [ ] Fetch from `/api/admin/settings`
+- [ ] Persist configurable settings when backend storage exists
 
 ---
 
@@ -258,86 +261,36 @@ frontend/adminpanel/
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:8000/api
-NEXT_PUBLIC_ADMIN_URL=http://localhost:3001
-NEXT_PUBLIC_PUBLIC_URL=http://localhost:3000
-ADMIN_SECRET_KEY=your-secret-key
+NEXT_PUBLIC_ADMIN_URL=http://localhost:3001/admin
+NEXT_PUBLIC_PUBLIC_WEBSITE_URL=http://localhost:3000
 ```
 
 ---
 
-## Dependencies
+## Commands
 
-- **next**: ^15.0.0
-- **react**: ^18.0.0
-- **typescript**: Latest
-- **tailwindcss**: Latest
-- **axios**: For API calls
-- **react-hook-form**: Form management
-- **zod**: Validation
-- **recharts**: Charts & analytics
-- **next-auth**: Authentication (optional)
-
----
-
-## Control Flow
-
+```bash
+npm install
+npm run dev
+npm run lint
+npm run build
 ```
-Admin Actions
-    ↓
-Next.js API Routes (Optional)
-    ↓
-Laravel Backend API
-    ↓
-Database Updates
-    ↓
-Cache Invalidation
-    ↓
-Public Website Auto-updates
+
+Development server:
+
+```text
+http://localhost:3001/admin/login
 ```
 
 ---
 
-## Security Considerations
+## Verification
 
-- [ ] JWT token validation on every request
-- [ ] CORS configuration for API access
-- [ ] Rate limiting on API calls
-- [ ] Input validation on all forms
-- [ ] CSRF protection
-- [ ] Secure password storage (bcrypt)
-- [ ] Admin-only route protection
-- [ ] Audit logging for all changes
+Last checked:
 
----
-
-## Performance Optimization
-
-- [ ] Image optimization with next/image
-- [ ] Code splitting & lazy loading
-- [ ] Caching strategy for API responses
-- [ ] Database query optimization
-- [ ] CDN for static assets
-- [ ] Pagination for large datasets
-
----
-
-## Testing Strategy
-
-- [ ] Unit tests for services
-- [ ] Integration tests for API calls
-- [ ] E2E tests for user flows
-- [ ] Component tests with React Testing Library
-
----
-
-## Next Steps
-
-1. ✅ Create this roadmap
-2. 🔄 Initialize Next.js project
-3. 🔄 Setup authentication
-4. 🔄 Create dashboard
-5. 🔄 Build components
-6. 🔄 Connect to backend API
+- [x] `npm run lint`
+- [x] `npm run build`
+- [x] `/admin/login` returns HTTP 200 locally
 
 ---
 
