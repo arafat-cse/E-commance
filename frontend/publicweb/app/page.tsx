@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import Header from '@/components/Header';
 import SidebarCart from '@/components/SidebarCart';
+import MobileBottomNav from '@/components/MobileBottomNav';
+import MobileSidebar from '@/components/MobileSidebar';
 import HeroSlider from '@/components/HeroSlider';
 import FeaturedCategories from '@/components/FeaturedCategories';
 import ProductCard from '@/components/ProductCard';
@@ -16,6 +18,7 @@ import styles from './page.module.css';
 export default function Home() {
   const { searchQuery, cart, setIsCartOpen } = useStore();
   const [visibleProductsCount, setVisibleProductsCount] = useState(8);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   // Filter products for categories
   const honeyProducts = productsData.filter((p) => p.category === 'মধু (Honey)');
@@ -45,8 +48,10 @@ export default function Home() {
 
   return (
     <div className={styles.main}>
-      <Header />
+      <Header onMobileMenuOpen={() => setIsMobileSidebarOpen(true)} />
       <SidebarCart />
+      <MobileSidebar isOpen={isMobileSidebarOpen} onClose={() => setIsMobileSidebarOpen(false)} />
+      <MobileBottomNav onMenuToggle={() => setIsMobileSidebarOpen(true)} />
 
       {/* Floating Orange Cart Tag */}
       <div className={styles.floatingCart} onClick={() => setIsCartOpen(true)}>

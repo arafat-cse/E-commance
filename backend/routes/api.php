@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\StorefrontController;
+use App\Http\Controllers\Api\AdminCommerceController;
+use App\Http\Middleware\AdminMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,7 +83,7 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/{orderId}/invoice', [OrderController::class, 'invoice']);
         
         // Admin only
-        Route::middleware('admin')->group(function () {
+        Route::middleware(AdminMiddleware::class)->group(function () {
             Route::put('/{orderId}/status', [OrderController::class, 'updateStatus']);
         });
     });
@@ -96,12 +98,42 @@ Route::middleware('auth:api')->group(function () {
     });
 });
 
-// Admin routes (authentication + admin role required)
-Route::middleware(['auth:api', 'admin'])->group(function () {
+// Admin panel routes (authentication + admin role required)
+Route::middleware(['auth:api', AdminMiddleware::class])->prefix('admin')->group(function () {
+    Route::get('dashboard', [AdminCommerceController::class, 'dashboard']);
+    Route::get('settings', [AdminCommerceController::class, 'settings']);
+
     Route::prefix('products')->group(function () {
-        Route::post('/', [ProductController::class, 'store']);
-        Route::put('/{id}', [ProductController::class, 'update']);
-        Route::delete('/{id}', [ProductController::class, 'destroy']);
+        Route::get('/', [AdminCommerceController::class, 'products']);
+        Route::post('/', [AdminCommerceController::class, 'storeProduct']);
+        Route::get('/{id}', [AdminCommerceController::class, 'showProduct'])->whereNumber('id');
+        Route::put('/{id}', [AdminCommerceController::class, 'updateProduct'])->whereNumber('id');
+        Route::delete('/{id}', [AdminCommerceController::class, 'deleteProduct'])->whereNumber('id');
+    });
+
+    Route::prefix('orders')->group(function () {
+        Route::get('/', [AdminCommerceController::class, 'orders']);
+        Route::get('/{id}', [AdminCommerceController::class, 'showOrder'])->whereNumber('id');
+        Route::put('/{id}', [AdminCommerceController::class, 'updateOrder'])->whereNumber('id');
+    });
+
+    Route::prefix('customers')->group(function () {
+        Route::get('/', [AdminCommerceController::class, 'customers']);
+        Route::get('/{id}', [AdminCommerceController::class, 'showCustomer'])->whereNumber('id');
+        Route::put('/{id}', [AdminCommerceController::class, 'updateCustomer'])->whereNumber('id');
+        Route::delete('/{id}', [AdminCommerceController::class, 'deleteCustomer'])->whereNumber('id');
+    });
+
+    Route::prefix('categories')->group(function () {
+        Route::get('/', [AdminCommerceController::class, 'categories']);
+        Route::put('/{category}', [AdminCommerceController::class, 'updateCategory']);
+        Route::delete('/{category}', [AdminCommerceController::class, 'deleteCategory']);
+    });
+
+    Route::prefix('reviews')->group(function () {
+        Route::get('/', [AdminCommerceController::class, 'reviews']);
+        Route::put('/{id}', [AdminCommerceController::class, 'updateReview'])->whereNumber('id');
+        Route::delete('/{id}', [AdminCommerceController::class, 'deleteReview'])->whereNumber('id');
     });
 });
 

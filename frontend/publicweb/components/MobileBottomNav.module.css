@@ -1,0 +1,95 @@
+/* ══════════════════════════════════
+   ORANGE BOTTOM NAVIGATION BAR
+   (Mobile only – matches ghorerbazar.com)
+   ══════════════════════════════════ */
+
+.bottomNav {
+  display: none; /* Hidden on desktop */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: #f2ad1f; /* orange/amber – same as reference */
+  border-top: 2px solid #d99810;
+  box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.15);
+  padding: 0.55rem 0;
+  padding-bottom: max(0.55rem, env(safe-area-inset-bottom));
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* Nav item (link or button) */
+.navItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.6rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+  min-width: 50px;
+  position: relative;
+}
+
+.navItem:hover {
+  background-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+.navItem.active {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.navItem span {
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.03em;
+}
+
+.navItem svg {
+  stroke: #fff;
+}
+
+/* Cart icon wrapper for badge */
+.cartWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cartBadge {
+  position: absolute;
+  top: -7px;
+  right: -8px;
+  background: #fff;
+  color: var(--primary, #2b7843);
+  font-size: 0.6rem;
+  font-weight: 900;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Show only on mobile ── */
+@media (max-width: 768px) {
+  .bottomNav {
+    display: flex;
+  }
+}
