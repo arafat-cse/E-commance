@@ -4,33 +4,49 @@ import styles from "./login.module.css";
 export default function LoginPage() {
   return (
     <main className={styles.page}>
-      <section className={styles.panel}>
-        <div>
-          <p className={styles.eyebrow}>Admin Access</p>
-          <h1>Sign in to Ghorer Bazar</h1>
-          <p className={styles.copy}>Manage products, orders, customers, and storefront updates from one controlled workspace.</p>
+      <section className={styles.brandPanel} aria-label="Ghorer Bazar admin">
+        <div className={styles.brandTop}>
+          <span className={styles.brandMark} />
+          <strong>Ghorer Bazar</strong>
         </div>
 
-        <LoginForm />
+        <div className={styles.brandCopy}>
+          <p className={styles.eyebrow}>Admin Workspace</p>
+          <h1>Control the store without exposing the store.</h1>
+          <p>
+            Products, orders, customers, and reports stay hidden until an authorized admin session is verified.
+          </p>
+        </div>
+
+        <div className={styles.securityStrip}>
+          <span>JWT protected</span>
+          <span>Role checked</span>
+          <span>Private routes</span>
+        </div>
       </section>
 
-      <aside className={styles.side}>
-        <div className={styles.notice}>
-          <span>Secure Admin Workspace</span>
-          <strong>Authorized access only</strong>
-          <p>Operational data appears after a valid admin session is created.</p>
+      <section className={styles.loginPanel}>
+        <div className={styles.card}>
+          <div className={styles.cardHeader}>
+            <span className={styles.lockIcon} aria-hidden="true">L</span>
+            <div>
+              <p className={styles.cardEyebrow}>Secure Sign In</p>
+              <h2>Welcome back</h2>
+            </div>
+          </div>
+
+          <p className={styles.copy}>
+            Enter your admin credentials to continue to the dashboard.
+          </p>
+
+          <LoginForm />
+
+          <div className={styles.helpBox}>
+            <strong>Need access?</strong>
+            <span>Ask the system owner to create an active admin account in the backend.</span>
+          </div>
         </div>
-        <div className={styles.notice}>
-          <span>Protected Routes</span>
-          <strong>/admin/*</strong>
-          <p>Dashboard, products, orders, and customer pages are blocked before login.</p>
-        </div>
-        <div className={styles.notice}>
-          <span>Backend Ready</span>
-          <strong>/api/admin</strong>
-          <p>Next step is replacing demo login with Laravel JWT authentication.</p>
-        </div>
-      </aside>
+      </section>
     </main>
   );
 }
